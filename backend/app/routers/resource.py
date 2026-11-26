@@ -94,5 +94,9 @@ def create_entry(module: str, payload: EntryPayload) -> ActionResult:
 @router.post("/{module}/{entry_id}/actions", response_model=ActionResult)
 def run_action(module: str, entry_id: int, payload: ActionPayload) -> ActionResult:
     service = require_service(module)
-    entry, message = service.run_action(entry_id, payload.action.strip())
+    try:
+        entry, message = service.run_action(entry_id, payload.action.strip(), payload.remark)
+    except TypeError:
+        # 兼容未扩展 remark 参数的领域服务。
+        entry, message = service.run_action(entry_id, payload.action.strip())
     return ActionResult(ok=entry is not None, message=message, entry=entry)

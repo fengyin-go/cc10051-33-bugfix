@@ -51,6 +51,10 @@ class EntityModelService(BaseModuleService):
             "pending": False,
             "abnormal": False,
         })
+        # 已生效变更同样按真实订阅关系投递可追溯、幂等的变更通知。
+        from app.services.model_change import ModelChangeService
+
+        ModelChangeService().dispatch_change_notifications(change_id)
         return {"ok": True, "version": new_ver, "change_id": change_id}
 
     def spawn_merge_tasks(self, entry_id: int, candidate_groups: list[str]) -> list[int]:

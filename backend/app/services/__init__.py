@@ -20,6 +20,8 @@ from app.services.sync_cursor import SyncCursorService
 from app.services.id_cross_map import IdCrossMapService
 from app.services.dist_receipt import DistReceiptService
 from app.services.model_change import ModelChangeService
+from app.services.change_notification import ChangeNotificationService
+from app.services.refresh_receipt import RefreshReceiptService
 from app.services.stats_overview import StatsOverviewService
 from app.services.ref_data_mgr import RefDataMgrService
 
@@ -42,6 +44,8 @@ SERVICES: dict[str, BaseModuleService] = {
     "id_cross_map": IdCrossMapService(),
     "dist_receipt": DistReceiptService(),
     "model_change": ModelChangeService(),
+    "change_notification": ChangeNotificationService(),
+    "refresh_receipt": RefreshReceiptService(),
     "stats_overview": StatsOverviewService(),
     "ref_data_mgr": RefDataMgrService(),
 }
